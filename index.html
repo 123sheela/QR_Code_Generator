@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR_Code_Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <p>Enter Your Text or URL</p>
+        <input type="text" placeholder="Text or URL" id="qrText">
+
+        <div class="imgBox" id="imgBox">
+            <img src="" id="qrImage">
+        </div>
+
+        <button onclick="generateQR()">Generate QR Code</button> 
+    </div>
+    
+    <script>
+      
+        let qrImage = document.getElementById("qrImage");    
+        let qrText = document.getElementById("qrText"); 
+        let imgBox = document.getElementById("imgBox");
+        function generateQR(){
+            if(qrText.value.length > 0){
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+                
+                imgBox.style.border = "1px solid #000000"; 
+                imgBox.style.borderRadius = "5px"; 
+                imgBox.style.width= "52%";
+                imgBox.style.padding = "10px";
+                imgBox.style.margin = "10px auto";
+
+                imgBox.classList.add("show-img");
+            }
+            else{
+                qrText.classList.add('error');
+                setTimeout(() =>{
+                    qrText.classList.remove('error');
+                },1000);
+
+                imgBox.style.border = "none"; //border will be hidden if the qr isn't generated.
+
+            }
+         
+        }
+    </script>
+</body>
+</html>
